@@ -7,6 +7,8 @@ const GamesPage = () => {
   const [allGames, setAllGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 20;
 
   const apiKey = process.env.REACT_APP_RAWG_API_KEY;
 
@@ -18,24 +20,19 @@ const GamesPage = () => {
     }
 
     axios
-      .get(`https://api.rawg.io/api/games?key=${apiKey}&page_size=20`)
+      .get(`https://api.rawg.io/api/games?key=${apiKey}&page_size=${pageSize}&page=${currentPage}`)
       .then((response) => {
         setAllGames(response.data.results);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError('Error al obtener todos los juegos');
         setLoading(false);
       });
-  }, [apiKey]);
+  }, [apiKey, currentPage]);
 
-  if (loading) {
-    return <p>Cargando juegos...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (loading) return <p>Cargando juegos...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="games-container">
@@ -44,13 +41,16 @@ const GamesPage = () => {
         {allGames.map((game) => (
           <div key={game.id} className="game-card">
             <img src={game.background_image} alt={game.name} />
-            <h3>{game.name}</h3>
+            <h3><Link to={`/game/${game.id}`}>{game.name}</Link></h3>
             <p>Fecha de lanzamiento: {game.released}</p>
           </div>
         ))}
       </div>
-
-      {/* Botón para volver al inicio */}
+      <div className="pagination">
+        <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Anterior</button>
+        <span>Página {currentPage}</span>
+        <button onClick={() => setCurrentPage((prev) => prev + 1)}>Siguiente</button>
+      </div>
       <div className="button-container">
         <Link to="/">
           <button className="back-btn">Volver al inicio</button>

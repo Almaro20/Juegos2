@@ -1,0 +1,23 @@
+.game-detail {
+    text-align: center;
+    background: #1e1e1e;
+    color: white;
+    padding: 20px;
+  }
+  
+  .game-detail img {
+    width: 70%;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  }
+  
+  .game-detail a {
+    color: #ff4757;
+    font-weight: bold;
+  }
+  
+  .game-detail a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,29 @@
+.publisher-page {
+    text-align: center;
+    background: #1e1e1e;
+    color: white;
+    padding: 20px;
+  }
+  
+  .publisher-page h1 {
+    color: #ff4757;
+  }
+  
+  .publisher-page ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .publisher-page li {
+    margin: 10px 0;
+  }
+  
+  .publisher-page a {
+    color: #ff4757;
+    font-weight: bold;
+  }
+  
+  .publisher-page a:hover {
+    text-decoration: underline;
+  }
+  
