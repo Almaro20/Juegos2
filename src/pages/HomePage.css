@@ -1,93 +1,84 @@
-/* Asegúrate de que el contenedor principal ocupe toda la altura de la pantalla */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .homepage-container {
-    padding: 30px;
-    text-align: center;
-    background-color: #345c86;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 100%;  /* Asegura que ocupe toda la altura disponible */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  /* Asegúrate de que el Slider no se quede pegado al borde */
-  .carousel-item {
-    padding: 15px;
-  }
-  
-  /* Imágenes dentro del carrusel con un hover efecto */
-  .carousel-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Efecto de zoom al pasar el ratón sobre las imágenes */
-  .carousel-item img:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Estilo de los títulos */
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  /* Estilo de los puntos del carrusel */
-  .slick-dots {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .slick-dots li button:before {
-    color: white;
-    font-size: 18px;
-    opacity: 0.8;
-  }
-  
-  /* Puntos activos */
-  .slick-dots li.slick-active button:before {
-    color: #ff9f00;
-    opacity: 1;
-  }
-  
-  /* Estilo del botón "Ver todos los juegos" */
-  .btn-view-all {
-    margin-top: 25px;
-    padding: 12px 25px;
-    font-size: 18px;
-    background-color: #ff9f00;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  /* Efecto al hacer hover en el botón */
-  .btn-view-all:hover {
-    background-color: #ff7f00;
-    transform: translateY(-3px);
-  }
-  
-  .btn-view-all a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-  }
-  
+/* HomePage.css */
+.homepage-container {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.carousel-item {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.carousel-item:hover {
+  transform: scale(1.05);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.search-publishers {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.search-publishers input {
+  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-publishers button {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-publishers button:hover {
+  background: #e68900;
+}
+
+.publisher-results {
+  margin-top: 20px;
+}
+
+.publisher-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.publisher-results li {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.publisher-results a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.publisher-results a:hover {
+  text-decoration: underline;
+}
