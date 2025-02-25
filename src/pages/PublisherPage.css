@@ -1,29 +1,82 @@
+/* PublisherPage.css */
 .publisher-page {
     text-align: center;
-    background: #1e1e1e;
+    background: #111;
     color: white;
-    padding: 20px;
+    padding: 40px;
+    font-family: 'Arial', sans-serif;
   }
   
   .publisher-page h1 {
     color: #ff4757;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .publisher-page p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: #ccc;
+  }
+  
+  .publisher-page h2 {
+    font-size: 1.8rem;
+    color: #ffcc00;
+    margin-bottom: 20px;
   }
   
   .publisher-page ul {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
   
   .publisher-page li {
-    margin: 10px 0;
+    margin: 12px 0;
+    font-size: 1.2rem;
   }
   
   .publisher-page a {
     color: #ff4757;
     font-weight: bold;
+    transition: color 0.3s, text-decoration 0.3s;
   }
   
   .publisher-page a:hover {
+    color: #ffcc00;
     text-decoration: underline;
+  }
+  
+  .button-container {
+    margin-top: 30px;
+  }
+  
+  .back-btn {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    color: white;
+    background-color: #ff4757;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .back-btn:hover {
+    background-color: #e84343;
+    transform: translateY(-2px);
+  }
+  
+  .back-btn:focus {
+    outline: none;
+  }
+  
+  .loading, .error {
+    font-size: 1.5rem;
+    color: #ffcc00;
+    font-weight: bold;
+    margin-top: 30px;
   }
   

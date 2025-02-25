@@ -1,3 +1,4 @@
+// src/pages/views/HomePage.js
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
@@ -65,6 +66,10 @@ const HomePage = () => {
           </div>
         ))}
       </Slider>
+
+      <div className="navigation">
+        <Link to="/games" className="games-link">Ver todos los juegos</Link>
+      </div>
 
       <div className="search-publishers">
         <h2>Buscar Publishers</h2>

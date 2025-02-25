@@ -1,22 +1,29 @@
 /* HomePage.css */
 .homepage-container {
   text-align: center;
-  padding: 20px;
-  background: linear-gradient(to right, #1e3c72, #2a5298);
+  padding: 30px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: white;
   min-height: 100vh;
+  font-family: 'Arial', sans-serif;
 }
 
-h1, h2 {
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+h2 {
   font-size: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .carousel-item {
   position: relative;
-  border-radius: 15px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease-in-out;
 }
 
 .carousel-item:hover {
@@ -25,33 +32,77 @@ h1, h2 {
 
 .carousel-item img {
   width: 100%;
-  height: auto;
-  border-radius: 15px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.carousel-item h3 {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.navigation {
+  margin-top: 30px;
+}
+
+.games-link {
+  font-size: 1.2rem;
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s, color 0.3s;
+}
+
+.games-link:hover {
+  background: #ffcc00;
+  color: #1e3c72;
 }
 
 .search-publishers {
-  margin-top: 30px;
+  margin-top: 40px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .search-publishers input {
-  width: 80%;
-  padding: 10px;
-  font-size: 1rem;
+  width: 70%;
+  padding: 12px;
+  font-size: 1.2rem;
   margin-right: 10px;
-  border: none;
+  border: 2px solid #ff9800;
   border-radius: 5px;
+  background: transparent;
+  color: white;
+  transition: border 0.3s;
+}
+
+.search-publishers input::placeholder {
+  color: #ff9800;
+}
+
+.search-publishers input:focus {
+  border-color: #ffcc00;
 }
 
 .search-publishers button {
   background: #ff9800;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1.1rem;
   transition: background 0.3s;
 }
 
@@ -69,7 +120,7 @@ h1, h2 {
 }
 
 .publisher-results li {
-  margin: 10px 0;
+  margin: 12px 0;
   font-size: 1.2rem;
 }
 
@@ -77,8 +128,17 @@ h1, h2 {
   color: #ffcc00;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s ease-in-out;
 }
 
 .publisher-results a:hover {
+  color: #fff;
   text-decoration: underline;
+}
+
+.loading {
+  font-size: 1.5rem;
+  color: #ffcc00;
+  font-weight: bold;
+  margin-top: 50px;
 }
