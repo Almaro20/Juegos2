@@ -13,21 +13,26 @@ const PublisherPage = () => {
 
   useEffect(() => {
     const fetchPublisherData = async () => {
+      if (!apiKey) {
+        setError("Clave de API no encontrada.");
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       setError(null);
 
       try {
-        // Obtener información del publisher
-        const publisherResponse = await axios.get(`https://api.rawg.io/api/publishers/${id}?key=${apiKey}`);
-        
-        if (!publisherResponse.data || Object.keys(publisherResponse.data).length === 0) {
-          throw new Error("No se encontró el publisher.");
-        }
-        
-        setPublisher(publisherResponse.data);
+        const [publisherResponse, gamesResponse] = await Promise.all([
+          axios.get(`https://api.rawg.io/api/publishers/${id}?key=${apiKey}`),
+          axios.get(`https://api.rawg.io/api/games?key=${apiKey}&publishers=${id}`)
+        ]);
 
-        // Obtener juegos del publisher
-        const gamesResponse = await axios.get(`https://api.rawg.io/api/games?key=${apiKey}&publishers=${id}`);
+        if (!publisherResponse.data || Object.keys(publisherResponse.data).length === 0) {
+          throw new Error("No se encontró información del publisher.");
+        }
+
+        setPublisher(publisherResponse.data);
         setGames(gamesResponse.data.results || []);
       } catch (err) {
         setError("Error al cargar los datos del publisher.");
@@ -39,24 +44,17 @@ const PublisherPage = () => {
     };
 
     fetchPublisherData();
-  }, [id]);
+  }, [id, apiKey]);
 
   if (loading) return <p className="loading">Cargando...</p>;
   if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="publisher-page">
-      {/* Si no hay publisher, mostrar error */}
-      {!publisher ? (
-        <p className="error">Publisher no encontrado.</p>
-      ) : (
+      {publisher ? (
         <>
           <h1>{publisher.name}</h1>
-          {publisher.description ? (
-            <p>{publisher.description}</p>
-          ) : (
-            <p><em>Sin descripción disponible.</em></p>
-          )}
+          <p>{publisher.description || <em>Sin descripción disponible.</em>}</p>
 
           <h2>Juegos Publicados</h2>
           {games.length > 0 ? (
@@ -71,6 +69,8 @@ const PublisherPage = () => {
             <p>No hay juegos disponibles para este publisher.</p>
           )}
         </>
+      ) : (
+        <p className="error">Publisher no encontrado.</p>
       )}
 
       <div className="button-container">
