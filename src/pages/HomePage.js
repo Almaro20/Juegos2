@@ -1,4 +1,3 @@
-// src/pages/views/HomePage.js
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
@@ -55,6 +54,15 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
+      {/* NAVBAR */}
+      <nav className="navbar">
+        <ul>
+          <li><Link to="/">Inicio</Link></li>
+          <li><Link to="/games">Juegos</Link></li>
+          <li><Link to="/publishers">Publishers</Link></li>
+        </ul>
+      </nav>
+
       <h1>Juegos Populares</h1>
       <Slider {...settings}>
         {popularGames.map((game) => (
@@ -99,3 +107,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
