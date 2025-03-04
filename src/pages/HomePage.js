@@ -59,7 +59,7 @@ const HomePage = () => {
         <ul>
           <li><Link to="/">Inicio</Link></li>
           <li><Link to="/games">Juegos</Link></li>
-          <li><Link to="/publishers">Publishers</Link></li>
+          <li><Link to="/publisher/:id">Publishers</Link></li>
         </ul>
       </nav>
 
