@@ -20,7 +20,7 @@ function App() {
         {/* Ruta de todos los juegos */}
         <Route path="/games" element={<GamesPage />} />
 
-        <Route path="/games/:id" element={<GameDetailPage />} />
+        <Route path="/game/:id" element={<GameDetailPage />} />
 
       </Routes>
     </Router>
