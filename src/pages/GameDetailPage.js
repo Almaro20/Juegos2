@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import './GameDetailPage.css';
 
-
 const GameDetailPage = () => {
   let { id } = useParams();
   const [game, setGame] = useState(null);
@@ -17,7 +16,7 @@ const GameDetailPage = () => {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [id, apiKey]);
+  }, [id]);
 
   if (loading) return <p>Cargando...</p>;
   if (!game) return <p>Juego no encontrado</p>;
@@ -27,9 +26,25 @@ const GameDetailPage = () => {
       <h1>{game.name}</h1>
       <img src={game.background_image} alt={game.name} />
       <p>{game.description_raw}</p>
-      <p><strong>Publisher:</strong> <Link to={`/publisher/${game.publishers[0]?.id}`}>{game.publishers[0]?.name}</Link></p>
-      <p><strong>Plataformas:</strong> {game.platforms.map(p => p.platform.name).join(", ")}</p>
-      <p><strong>Tags:</strong> {game.tags.map(tag => <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>)}</p>
+      
+      {game.publishers?.length > 0 && (
+        <p>
+          <strong>Publisher:</strong> 
+          <Link to={`/publisher/${game.publishers[0].id}`}>
+            {game.publishers[0].name}
+          </Link>
+        </p>
+      )}
+
+      {game.platforms?.length > 0 && (
+        <p><strong>Plataformas:</strong> {game.platforms.map(p => p.platform.name).join(", ")}</p>
+      )}
+
+      {game.tags?.length > 0 && (
+        <p><strong>Tags:</strong> {game.tags.map(tag => (
+          <Link key={tag.id} to={`/tag/${tag.id}`}>{tag.name}</Link>
+        ))}</p>
+      )}
     </div>
   );
 };
