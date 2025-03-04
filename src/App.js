@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';  // La página de inicio
 import GamesPage from './pages/GamesPage';  // La página de juegos
 import GameDetailPage from './pages/GameDetailPage';
+import PublisherPage from './pages/PublisherPage';
+
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,6 +23,9 @@ function App() {
         <Route path="/games" element={<GamesPage />} />
 
         <Route path="/game/:id" element={<GameDetailPage />} />
+
+        <Route path="/publisher/:id" element={<PublisherPage />} />
+
 
       </Routes>
     </Router>

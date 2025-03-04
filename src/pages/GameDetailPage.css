@@ -1,23 +1,78 @@
 .game-detail {
-    text-align: center;
-    background: #1e1e1e;
-    color: white;
-    padding: 20px;
-  }
-  
-  .game-detail img {
-    width: 70%;
-    border-radius: 10px;
-    margin: 20px 0;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-  }
-  
-  .game-detail a {
-    color: #ff4757;
-    font-weight: bold;
-  }
-  
-  .game-detail a:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #121212, #1e1e1e);
+  color: white;
+  padding: 40px 20px;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.game-detail h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.game-detail img {
+  width: 80%;
+  max-width: 900px;
+  border-radius: 15px;
+  margin: 20px 0;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.game-detail img:hover {
+  transform: scale(1.03);
+}
+
+.game-detail p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-bottom: 20px;
+  color: #cccccc;
+}
+
+.game-detail a {
+  color: #ff4757;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.game-detail a:hover {
+  color: #ff6b81;
+  text-decoration: underline;
+}
+
+.game-detail .info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.game-detail .info-section p {
+  margin: 10px 0;
+}
+
+.game-detail .back-button {
+  margin-top: 30px;
+}
+
+.game-detail .back-button a {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background: #ff4757;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease-in-out;
+}
+
+.game-detail .back-button a:hover {
+  background: #ff6b81;
+}
