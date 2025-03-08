@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGames, setPage } from '../redux/slices/gamesSlice';  // Importamos las acciones
 import { Link } from 'react-router-dom';
 import './GamesPage.css';
 
 const GamesPage = () => {
-  const [allGames, setAllGames] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 20;
-
-  const apiKey = process.env.REACT_APP_RAWG_API_KEY;
-
+  const dispatch = useDispatch();
+  const { allGames, loading, error, currentPage } = useSelector(state => state.games);
+  
+  // Efecto para cargar los juegos cuando la página cambie
   useEffect(() => {
-    if (!apiKey) {
-      setError('No se encontró la clave de API.');
-      setLoading(false);
-      return;
-    }
-
-    axios
-      .get(`https://api.rawg.io/api/games?key=${apiKey}&page_size=${pageSize}&page=${currentPage}`)
-      .then((response) => {
-        setAllGames(response.data.results);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError('Error al obtener todos los juegos');
-        setLoading(false);
-      });
-  }, [apiKey, currentPage]);
+    dispatch(fetchGames(currentPage)); // Usamos el currentPage del estado global
+  }, [dispatch, currentPage]);
 
   if (loading) return <p>Cargando juegos...</p>;
   if (error) return <p>{error}</p>;
@@ -47,9 +29,9 @@ const GamesPage = () => {
         ))}
       </div>
       <div className="pagination">
-        <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Anterior</button>
+        <button onClick={() => dispatch(setPage(currentPage - 1))} disabled={currentPage === 1}>Anterior</button>
         <span>Página {currentPage}</span>
-        <button onClick={() => setCurrentPage((prev) => prev + 1)}>Siguiente</button>
+        <button onClick={() => dispatch(setPage(currentPage + 1))}>Siguiente</button>
       </div>
       <div className="button-container">
         <Link to="/">

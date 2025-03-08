@@ -1,76 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import axios from "axios";
-import "./PublisherPage.css";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPublisherData } from '../redux/thunks'; // Agrega el thunk necesario
+import { Link, useParams } from 'react-router-dom';
+import './PublisherPage.css';
 
 const PublisherPage = () => {
-  const { id } = useParams();
-  const [publisher, setPublisher] = useState(null);
-  const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const apiKey = process.env.REACT_APP_RAWG_API_KEY;
+  const { id } = useParams(); // Obtenemos el id del publisher desde los parámetros de la URL
+  const dispatch = useDispatch();
+  const { publisher, games, loading, error } = useSelector(state => state.publishers);
 
+  // Cargar los datos del publisher cuando el componente se monta
   useEffect(() => {
-    const fetchPublisherData = async () => {
-      if (!apiKey) {
-        setError("Clave de API no encontrada.");
-        setLoading(false);
-        return;
-      }
+    dispatch(fetchPublisherData(id)); // Despachamos el thunk con el id del publisher
+  }, [dispatch, id]);
 
-      setLoading(true);
-      setError(null);
-
-      try {
-        const [publisherResponse, gamesResponse] = await Promise.all([
-          axios.get(`https://api.rawg.io/api/publishers/${id}?key=${apiKey}`),
-          axios.get(`https://api.rawg.io/api/games?key=${apiKey}&publishers=${id}`)
-        ]);
-
-        if (!publisherResponse.data || Object.keys(publisherResponse.data).length === 0) {
-          throw new Error("No se encontró información del publisher.");
-        }
-
-        setPublisher(publisherResponse.data);
-        setGames(gamesResponse.data.results || []);
-      } catch (err) {
-        setError("Error al cargar los datos del publisher.");
-        setPublisher(null);
-        setGames([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPublisherData();
-  }, [id, apiKey]);
-
+  // Mostrar estado de carga o error
   if (loading) return <p className="loading">Cargando...</p>;
   if (error) return <p className="error">{error}</p>;
 
+  // Si no se encuentra el publisher, mostramos un mensaje
+  if (!publisher) return <p className="error">Publisher no encontrado.</p>;
+
   return (
     <div className="publisher-page">
-      {publisher ? (
-        <>
-          <h1>{publisher.name}</h1>
-          <p>{publisher.description || <em>Sin descripción disponible.</em>}</p>
+      <h1>{publisher.name}</h1>
+      <p>{publisher.description || <em>Sin descripción disponible.</em>}</p>
 
-          <h2>Juegos Publicados</h2>
-          {games.length > 0 ? (
-            <ul>
-              {games.map((game) => (
-                <li key={game.id}>
-                  <Link to={`/game/${game.id}`}>{game.name}</Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No hay juegos disponibles para este publisher.</p>
-          )}
-        </>
+      <h2>Juegos Publicados</h2>
+      {games.length > 0 ? (
+        <ul>
+          {games.map((game) => (
+            <li key={game.id}>
+              <Link to={`/game/${game.id}`}>{game.name}</Link>
+            </li>
+          ))}
+        </ul>
       ) : (
-        <p className="error">Publisher no encontrado.</p>
+        <p>No hay juegos disponibles para este publisher.</p>
       )}
 
       <div className="button-container">

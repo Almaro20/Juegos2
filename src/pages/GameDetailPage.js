@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGameDetails } from "../redux/slices/gamesSlice";
 import "./GameDetailPage.css";
 
 const GameDetailPage = () => {
   const { id } = useParams();
-  const [game, setGame] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const apiKey = process.env.REACT_APP_RAWG_API_KEY;
+  const dispatch = useDispatch();
+
+  // Accedemos al estado de Redux para obtener el juego, cargando y el error.
+  const { game, loading, error } = useSelector((state) => state.game);
 
   useEffect(() => {
-    const fetchGameDetails = async () => {
-      try {
-        const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${apiKey}`);
-        setGame(response.data);
-      } catch (err) {
-        setError("Error al cargar los detalles del juego.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGameDetails();
-  }, [id, apiKey]); // Se agrega apiKey para evitar warning en Netlify
+    // Solo hacer la petición si el juego no está ya cargado (evitar peticiones duplicadas)
+    if (!game || game.id !== parseInt(id)) {
+      dispatch(fetchGameDetails(id));
+    }
+  }, [id, dispatch, game]);
 
   if (loading) return <p className="loading">Cargando...</p>;
   if (error) return <p className="error">{error}</p>;

@@ -1,56 +1,27 @@
-import React, { useEffect, useState } from 'react';
+// src/pages/HomePage.js
+
+import React, { useEffect } from 'react';
 import Slider from 'react-slick';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPopularGames, fetchPublisherData } from '../redux/thunks';  // IMPORTA LA ACCIÓN CORRECTA
+import { setSearchTerm } from '../redux/slices/gameSlice';  // No olvides importar setSearchTerm también
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 const HomePage = () => {
-  const [popularGames, setPopularGames] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [publishers, setPublishers] = useState([]);
+  const dispatch = useDispatch();
+  const { popularGames, publishers, searchTerm, loading, error } = useSelector(state => state.games);
 
-  const apiKey = process.env.REACT_APP_RAWG_API_KEY;
-
+  // Cargar juegos populares y publishers cuando el componente se monta
   useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const response = await axios.get('https://api.rawg.io/api/games', {
-          params: {
-            key: apiKey,
-            page_size: 5,
-            ordering: 'rating',
-          },
-        });
-        setPopularGames(response.data.results);
-      } catch (error) {
-        console.error("Error al obtener juegos populares:", error);
-      }
-    };
-    fetchGames();
-  }, [apiKey]);
-
-  const handleSearch = async () => {
-    if (searchTerm.trim() === '') return;
-    try {
-      const response = await axios.get(`https://api.rawg.io/api/publishers`, {
-        params: {
-          key: apiKey,
-          search: searchTerm,
-        },
-      });
-      setPublishers(response.data.results);
-    } catch (error) {
-      console.error("Error al buscar publishers:", error);
+    dispatch(fetchPopularGames()); // Cargar juegos populares
+    if (searchTerm) {
+      dispatch(fetchPublisherData(searchTerm)); // Buscar publishers si hay término de búsqueda
     }
-  };
+  }, [dispatch, searchTerm]);  // Dependemos de searchTerm para obtener publishers
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-  };
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="homepage-container">
@@ -64,7 +35,7 @@ const HomePage = () => {
       </nav>
 
       <h1>Juegos Populares</h1>
-      <Slider {...settings}>
+      <Slider>
         {popularGames.map((game) => (
           <div key={game.id} className="carousel-item">
             <Link to={`/game/${game.id}`}>
@@ -85,9 +56,8 @@ const HomePage = () => {
           type="text"
           placeholder="Ingresa el nombre del publisher"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => dispatch(setSearchTerm(e.target.value))}  // Actualiza el término de búsqueda
         />
-        <button onClick={handleSearch}>Buscar</button>
       </div>
 
       {publishers.length > 0 && (
@@ -107,4 +77,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
