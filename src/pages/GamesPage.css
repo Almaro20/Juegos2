@@ -1,61 +1,118 @@
+/* Estilo principal de la página */
 .games-container {
   text-align: center;
-  background-color: #1e1e1e;
-  color: white;
-  padding: 20px;
+  background-color: #121212;  /* Fondo más oscuro para un diseño elegante */
+  color: #f5f5f5;  /* Color de texto más suave */
+  padding: 40px 20px;  /* Padding mejorado para un espacio más cómodo */
 }
 
+/* Diseño de la cuadrícula de los juegos */
 .all-games {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Mantener las tarjetas alineadas */
+  gap: 30px;  /* Espacio entre las tarjetas */
   padding: 20px;
+  justify-items: center;  /* Asegura que las tarjetas estén centradas */
 }
 
+/* Estilo de cada tarjeta de juego */
 .game-card {
-  background: #292929;
+  background: #1d1d1d;  /* Fondo más oscuro para resaltar las imágenes */
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer; /* Indicador de que la tarjeta es clickeable */
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra suave */
 }
 
+/* Efecto hover para las tarjetas */
 .game-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(255, 255, 255, 0.2); /* Sombra más fuerte */
+  background-color: #333333; /* Ligera variación de color para el hover */
 }
 
+/* Imagen del juego */
 .game-card img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: 200px;  /* Aumento en la altura para darle más espacio a la imagen */
+  object-fit: cover;  /* Asegura que la imagen mantenga la proporción */
+  border-bottom: 3px solid #ff4757;  /* Agrega una línea en la parte inferior de la imagen */
 }
 
+/* Título del juego */
 .game-card h3 {
-  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 15px;
+  text-transform: capitalize;
+  color: #f1f1f1;
+  transition: color 0.3s ease;
 }
 
+/* Hover para el título del juego */
+.game-card:hover h3 {
+  color: #ff4757;  /* Cambiar el color del título al pasar el mouse */
+}
+
+/* Estilo de la paginación */
 .pagination {
-  margin: 20px;
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .pagination button {
   background-color: #ff4757;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 12px 20px;
+  font-size: 16px;
   cursor: pointer;
-  margin: 5px;
+  margin: 0 8px;
+  border-radius: 8px; /* Bordes redondeados */
+  transition: 0.3s ease;
+  text-transform: uppercase; /* Hace que los botones se vean más modernos */
 }
 
+.pagination button:hover {
+  background-color: #ff6b81;
+}
+
+/* Estilo para el botón de regreso */
 .back-btn {
   background-color: #ff4757;
-  padding: 10px 20px;
+  padding: 12px 25px;
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
   transition: 0.3s;
+  text-transform: uppercase; /* Estilo de texto en mayúsculas */
 }
 
 .back-btn:hover {
   background-color: #ff6b81;
+  transform: scale(1.05);  /* Efecto de escala para darle un toque de interacción */
+}
+
+/* Mejoras responsivas */
+@media (max-width: 768px) {
+  .all-games {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajuste para pantallas más pequeñas */
+  }
+
+  .game-card img {
+    height: 150px;  /* Ajustar la altura de las imágenes para pantallas pequeñas */
+  }
+
+  .pagination button {
+    padding: 10px 15px;  /* Hacer los botones más pequeños en pantallas pequeñas */
+  }
+
+  .back-btn {
+    padding: 10px 20px;  /* Ajuste de tamaño para dispositivos pequeños */
+  }
 }

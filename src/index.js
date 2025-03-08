@@ -1,27 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom/client";  // Asegúrate de importar desde 'react-dom/client'
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick-theme.css";
 import { Provider } from "react-redux";
-import store  from "./redux/store"; 
+import store from "./redux/store"; 
 
-import './styles/slick.css';
-import './styles/slick-theme.css';
+import 'slick-carousel/slick/slick.css';  // Importa el estilo básico de Slick Carousel
+import 'slick-carousel/slick/slick-theme.css';  // Importa el tema de Slick Carousel
 
-
-
-
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
-
+// Usamos createRoot en lugar de ReactDOM.render para React 18+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -32,7 +20,7 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Si deseas empezar a medir el rendimiento en tu app, pasa una función
+// para registrar los resultados (por ejemplo: reportWebVitals(console.log))
+// o envíalos a un endpoint de análisis. Aprende más: https://bit.ly/CRA-vitals
 reportWebVitals();

@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGames, setPage } from '../redux/slices/gamesSlice';  // Importamos las acciones
+import { fetchGames, setPage } from '../redux/slices/gamesSlice';  
 import { Link } from 'react-router-dom';
-
 import './GamesPage.css';
 
 const GamesPage = () => {
   const dispatch = useDispatch();
   const { allGames, loading, error, currentPage } = useSelector(state => state.games);
-  
-  // Efecto para cargar los juegos cuando la página cambie
+
   useEffect(() => {
-    dispatch(fetchGames(currentPage)); // Usamos el currentPage del estado global
+    dispatch(fetchGames(currentPage)); 
   }, [dispatch, currentPage]);
 
   if (loading) return <p>Cargando juegos...</p>;
