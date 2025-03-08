@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGames, setPage } from '../redux/slices/gamesSlice';  // Importamos las acciones
 import { Link } from 'react-router-dom';
+
 import './GamesPage.css';
 
 const GamesPage = () => {

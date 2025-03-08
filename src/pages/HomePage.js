@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPopularGames, fetchPublisherData } from '../redux/thunks';  // IMPORTA LA ACCIÓN CORRECTA
-import { setSearchTerm } from '../redux/slices/gameSlice';  // No olvides importar setSearchTerm también
+import { setSearchTerm } from '../redux/slices/gamesSlice';  // No olvides importar setSearchTerm también
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 
