@@ -13,6 +13,7 @@ const initialState = {
   error: null,
   currentPage: 1,
   searchTerm: '',
+  favorites: [],  // Agregamos el estado de favoritos
 };
 
 // Thunk para obtener todos los juegos
@@ -52,6 +53,15 @@ const gameSlice = createSlice({
     },
     setPage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    // Acción para agregar o quitar favoritos
+    toggleFavorite: (state, action) => {
+      const gameId = action.payload;
+      if (state.favorites.includes(gameId)) {
+        state.favorites = state.favorites.filter(id => id !== gameId); // Eliminar de favoritos
+      } else {
+        state.favorites.push(gameId); // Agregar a favoritos
+      }
     },
   },
   extraReducers: (builder) => {
@@ -97,7 +107,7 @@ const gameSlice = createSlice({
   },
 });
 
-// Exportamos las acciones para el search term y la página
-export const { setSearchTerm, setPage } = gameSlice.actions;
+// Exportamos las acciones para el search term, la página y los favoritos
+export const { setSearchTerm, setPage, toggleFavorite } = gameSlice.actions;
 
 export default gameSlice.reducer;

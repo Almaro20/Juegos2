@@ -116,3 +116,14 @@
     padding: 10px 20px;  /* Ajuste de tamaño para dispositivos pequeños */
   }
 }
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.favorite-btn.favorito {
+  color: red;
+}

@@ -7,7 +7,7 @@ import './HomePage.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { popularGames, publishers, searchTerm, loading, error } = useSelector(state => state.games);
+  const { popularGames, publishers, searchTerm, loading, error, user } = useSelector(state => state.games);
 
   useEffect(() => {
     dispatch(fetchPopularGames()); // Cargar juegos populares
@@ -28,6 +28,18 @@ const HomePage = () => {
           <li><Link to="/games">Juegos</Link></li>
           <li><Link to="/publishers">Publishers</Link></li> 
         </ul>
+
+        {/* Si el usuario está logueado, muestra el nombre del usuario y el botón de cerrar sesión */}
+        {user ? (
+          <div className="user-info">
+            <p>Bienvenido, {user.username}!</p>
+            <Link to="/profile">Ver perfil</Link>
+            <button onClick={() => dispatch({ type: 'LOGOUT' })}>Cerrar sesión</button>
+          </div>
+        ) : (
+          // Aquí no mostramos los enlaces de login ni registro
+          <div></div>
+        )}
       </nav>
 
       {/* Título */}
